@@ -7,8 +7,9 @@
 class Vector
 {
 public:
-    Vector(unsigned int n);
-    Vector(unsigned int n, const double x);
+    Vector(const unsigned int n);
+    Vector(const unsigned int n, const double x);
+    Vector(const Vector& v);
     double getne(const unsigned int& i);
     void setne(const unsigned int& i, const double value);
     std::string toString();

@@ -1,13 +1,19 @@
-#include "gslppvector.hpp"
+#include "easy_vector.h"
 
 Vector::Vector(const unsigned int n): _size(n)
 {
     _vect = gsl_vector_alloc(_size);
 }
-Vector::Vector(unsigned int n, const double x): _size(n)
+Vector::Vector(const unsigned int n, const double x): _size(n)
 {
     _vect = gsl_vector_alloc(_size);
     setAll(x);
+}
+Vector::Vector(const Vector& v)
+{
+    _size = v._size;
+    _vect = gsl_vector_alloc(_size);
+    gsl_vector_memcpy(_vect, v._vect);
 }
 
 double Vector::getne(const unsigned int& i)
