@@ -46,6 +46,11 @@ gsl_vector* Vector::getptr()
     return _vect;
 }
 
+int Vector::dim() const
+{
+    return _size;
+}
+
 std::string Vector::toString()
 {
     std::string str = "(";

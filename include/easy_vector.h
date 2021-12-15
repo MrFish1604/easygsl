@@ -14,6 +14,7 @@ public:
     void set(const unsigned int& i, const double value);
     double& at(const unsigned int& i);
     gsl_vector* getptr();
+    int dim() const;
     std::string toString();
     void zeros();
     void setAll(const double x);
