@@ -41,6 +41,11 @@ double& Vector::at(const unsigned int& i)
         return *gsl_vector_ptr(_vect, i);
 }
 
+gsl_vector* Vector::getptr()
+{
+    return _vect;
+}
+
 std::string Vector::toString()
 {
     std::string str = "(";
@@ -97,6 +102,11 @@ void Vector::operator/=(const double& a)
 double& Vector::operator[](const unsigned int& i)
 {
     return *gsl_vector_ptr(_vect, i);
+}
+
+Vector::~Vector()
+{
+    gsl_vector_free(_vect);
 }
 
 Vector operator+(const Vector& a, const Vector& b)

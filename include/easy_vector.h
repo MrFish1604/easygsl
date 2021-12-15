@@ -13,6 +13,7 @@ public:
     double get(const unsigned int& i);
     void set(const unsigned int& i, const double value);
     double& at(const unsigned int& i);
+    gsl_vector* getptr();
     std::string toString();
     void zeros();
     void setAll(const double x);
@@ -23,6 +24,7 @@ public:
     void operator/=(const Vector& v);
     void operator/=(const double& a);
     double& operator[](const unsigned int& i);
+    ~Vector();
 private:
     gsl_vector* _vect;
     unsigned int _size;
