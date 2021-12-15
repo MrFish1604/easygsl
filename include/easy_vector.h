@@ -10,8 +10,9 @@ public:
     Vector(const unsigned int n);
     Vector(const unsigned int n, const double x);
     Vector(const Vector& v);
-    double getne(const unsigned int& i);
-    void setne(const unsigned int& i, const double value);
+    double get(const unsigned int& i);
+    void set(const unsigned int& i, const double value);
+    double& at(const unsigned int& i);
     std::string toString();
     void zeros();
     void setAll(const double x);
@@ -21,6 +22,7 @@ public:
     void operator*=(const double& a);
     void operator/=(const Vector& v);
     void operator/=(const double& a);
+    double& operator[](const unsigned int& i);
 private:
     gsl_vector* _vect;
     unsigned int _size;

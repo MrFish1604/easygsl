@@ -1,4 +1,5 @@
 #include "easy_vector.h"
+#include <stdexcept>
 
 Vector::Vector(const unsigned int n): _size(n)
 {
@@ -16,24 +17,38 @@ Vector::Vector(const Vector& v)
     gsl_vector_memcpy(_vect, v._vect);
 }
 
-double Vector::getne(const unsigned int& i)
+double Vector::get(const unsigned int& i)
 {
-    return gsl_vector_get(_vect, i);
+    if(i>=_size)
+        throw std::out_of_range("Index out of range");
+    else
+       return gsl_vector_get(_vect, i);
 }
 
-void Vector::setne(const unsigned int& i, const double value)
+void Vector::set(const unsigned int& i, const double value)
 {
-    gsl_vector_set(_vect, i, value);
+    if(i>_size)
+        throw std::out_of_range("Index out of range");
+    else
+        gsl_vector_set(_vect, i, value);
+}
+
+double& Vector::at(const unsigned int& i)
+{
+    if(i>=_size)
+        throw std::out_of_range("Index out of range");
+    else
+        return *gsl_vector_ptr(_vect, i);
 }
 
 std::string Vector::toString()
 {
     std::string str = "(";
-    str += std::to_string(getne(0));
+    str += std::to_string(operator[](0));
     for(int i=1; i<_size; i++)
     {
         str += "  ";
-        str += std::to_string(getne(i));
+        str += std::to_string(operator[](i));
     }
     str += ")";
     return str;
@@ -77,6 +92,11 @@ void Vector::operator/=(const Vector& v)
 void Vector::operator/=(const double& a)
 {
     gsl_vector_scale(_vect, 1/a);
+}
+
+double& Vector::operator[](const unsigned int& i)
+{
+    return *gsl_vector_ptr(_vect, i);
 }
 
 Vector operator+(const Vector& a, const Vector& b)
