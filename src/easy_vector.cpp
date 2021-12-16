@@ -1,6 +1,11 @@
 #include "easy_vector.h"
 #include <stdexcept>
 
+
+Vector::Vector()
+{
+    _size = 0;
+}
 Vector::Vector(const unsigned int n): _size(n)
 {
     _vect = gsl_vector_alloc(_size);
@@ -166,6 +171,14 @@ bool Vector::operator==(const Vector& v)
     return gsl_vector_equal(_vect, v._vect);
 }
 
+void Vector::operator=(const Vector& v)
+{
+    if(_size == 0)
+        _vect = gsl_vector_alloc(v._size);
+    _size = v._size;
+    gsl_vector_memcpy(_vect, v._vect);
+}
+
 Vector::~Vector()
 {
     gsl_vector_free(_vect);
@@ -212,4 +225,13 @@ std::ostream& operator<<(std::ostream& stream, Vector& vect)
 {
     stream << vect.toString();
     return stream;
+}
+
+void createBasis(const unsigned int& dim, Vector* basis)
+{
+    for(int i=0; i<dim; i++)
+    {
+        basis[i] = Vector(dim, 0);
+        basis[i][i] = 1;
+    }
 }
