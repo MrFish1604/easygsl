@@ -114,6 +114,23 @@ double Vector::min(unsigned int* i)
     return mini;
 }
 
+double Vector::norm()
+{
+    return gsl_blas_dnrm2(_vect);
+}
+
+double Vector::sum()
+{
+    return gsl_blas_dasum(_vect);
+}
+
+double Vector::dot(const Vector& v)
+{
+    double result = 0;
+    gsl_blas_ddot(_vect, v._vect, &result);
+    return result;
+}
+
 void Vector::operator+=(const Vector& v)
 {
     gsl_vector_add(_vect, v._vect);

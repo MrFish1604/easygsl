@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <gsl/gsl_vector.h>
+#include <gsl/gsl_blas.h>
 
 class Vector
 {
@@ -23,6 +24,9 @@ public:
     double min();
     double max(unsigned int* i);
     double min(unsigned int* i);
+    double norm();
+    double sum();
+    double dot(const Vector& v);
     void operator+=(const Vector& v);
     void operator*=(const Vector& v);
     void operator*=(const double& a);
