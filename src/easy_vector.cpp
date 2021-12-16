@@ -46,7 +46,7 @@ gsl_vector* Vector::getptr()
     return _vect;
 }
 
-int Vector::dim() const
+int Vector::dim()
 {
     return _size;
 }
@@ -79,6 +79,41 @@ void Vector::basisne(const unsigned int i)
     gsl_vector_set_basis(_vect, i);
 }
 
+double Vector::max()
+{
+    return gsl_vector_max(_vect);
+}
+double Vector::min()
+{
+    return gsl_vector_min(_vect);
+}
+double Vector::max(unsigned int* i)
+{
+    double maxi = 0;
+    for(int j=0; j<_size; j++)
+    {
+        if(gsl_vector_get(_vect, j)>maxi)
+        {
+            maxi = gsl_vector_get(_vect, j);
+            *i = j;
+        }
+    }
+    return maxi;
+}
+double Vector::min(unsigned int* i)
+{
+    double mini = 0;
+    for(int j=0; j<_size; j++)
+    {
+        if(gsl_vector_get(_vect, j)<mini)
+        {
+            mini = gsl_vector_get(_vect, j);
+            *i = j;
+        }
+    }
+    return mini;
+}
+
 void Vector::operator+=(const Vector& v)
 {
     gsl_vector_add(_vect, v._vect);
@@ -107,6 +142,11 @@ void Vector::operator/=(const double& a)
 double& Vector::operator[](const unsigned int& i)
 {
     return *gsl_vector_ptr(_vect, i);
+}
+
+bool Vector::operator==(const Vector& v)
+{
+    return gsl_vector_equal(_vect, v._vect);
 }
 
 Vector::~Vector()

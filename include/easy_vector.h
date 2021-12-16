@@ -14,17 +14,22 @@ public:
     void set(const unsigned int& i, const double value);
     double& at(const unsigned int& i);
     gsl_vector* getptr();
-    int dim() const;
+    int dim();
     std::string toString();
     void zeros();
     void setAll(const double x);
     void basisne(const unsigned int i);
+    double max();
+    double min();
+    double max(unsigned int* i);
+    double min(unsigned int* i);
     void operator+=(const Vector& v);
     void operator*=(const Vector& v);
     void operator*=(const double& a);
     void operator/=(const Vector& v);
     void operator/=(const double& a);
     double& operator[](const unsigned int& i);
+    bool operator==(const Vector& v);
     ~Vector();
 private:
     gsl_vector* _vect;
