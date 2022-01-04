@@ -35,3 +35,12 @@ double scalar(const Vect3& u, const Vect3& v)
 {
     return gsl_vector_get(u._vect, 0)*gsl_vector_get(v._vect, 0) + gsl_vector_get(u._vect, 1)*gsl_vector_get(v._vect, 1) + gsl_vector_get(u._vect, 2)*gsl_vector_get(v._vect, 2);
 }
+
+Vect3* basis_ortho(const double& a)
+{
+    Vect3* basis = new Vect3[3];
+    basis[0][0] = a;
+    basis[1][1] = a;
+    basis[2][2] = a;
+    return basis;
+}

@@ -13,4 +13,6 @@ friend Vect3 cross(const Vect3& u, const Vect3& v);
 friend double scalar(const Vect3& u, const Vect3& v);
 };
 
+Vect3* basis_ortho(const double& a=1);
+
 #endif
