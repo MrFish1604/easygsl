@@ -37,7 +37,7 @@ public:
     bool operator==(const Vector& v);
     void operator=(const Vector& v);
     ~Vector();
-private:
+protected:
     gsl_vector* _vect;
     unsigned int _size;
 };
