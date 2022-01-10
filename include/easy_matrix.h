@@ -24,7 +24,7 @@ public:
     Vector getRow(const unsigned int& i);
     Vector getCol(const unsigned int& i);
     int nrows();
-    int nlines();
+    int ncols();
     std::string toString();     // TODO
     void setIdentity();
     void operator+=(const Matrix& mat);

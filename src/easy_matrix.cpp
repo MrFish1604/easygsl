@@ -40,9 +40,9 @@ Vector Matrix::getCol(const unsigned int& i)
     return Vector(gsl_matrix_column(_matrix, i));
 }
 
-int Matrix::nrows(){ return _nCols; }
+int Matrix::nrows(){ return _nLines; }
 
-int Matrix::nlines(){ return _nLines; }
+int Matrix::ncols(){ return _nCols; }
 
 std::string Matrix::toString()
 {
