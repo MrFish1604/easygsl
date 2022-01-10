@@ -11,6 +11,7 @@ public:
     Vector();
     Vector(const unsigned int n);
     Vector(const unsigned int n, const double x);
+    Vector(gsl_vector_view vv);
     Vector(const Vector& v);
     double get(const unsigned int& i);
     void set(const unsigned int& i, const double value);

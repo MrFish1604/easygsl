@@ -30,6 +30,16 @@ double& Matrix::atne(const unsigned int& i, const unsigned int& j)
     return *gsl_matrix_ptr(_matrix, i, j);
 }
 
+Vector Matrix::getRow(const unsigned int& i)
+{
+    return Vector(gsl_matrix_row(_matrix, i));
+}
+
+Vector Matrix::getCol(const unsigned int& i)
+{
+    return Vector(gsl_matrix_column(_matrix, i));
+}
+
 int Matrix::nrows(){ return _nCols; }
 
 int Matrix::nlines(){ return _nLines; }

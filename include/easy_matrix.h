@@ -4,6 +4,7 @@
 #include <gsl/gsl_matrix.h>
 #include <iostream>
 #include <gsl/gsl_blas.h>
+#include "easy_vector.h"
 
 typedef struct couple couple;
 struct couple
@@ -20,6 +21,8 @@ public:
     Matrix(const Matrix& mat);
     double& at(const unsigned int& i, const unsigned int& j);
     double& atne(const unsigned int& i, const unsigned int& j);
+    Vector getRow(const unsigned int& i);
+    Vector getCol(const unsigned int& i);
     int nrows();
     int nlines();
     std::string toString();     // TODO
@@ -34,7 +37,7 @@ public:
     void operator/=(const double& a);
     double& operator[](const couple& i);
     ~Matrix();
-private:
+protected:
     unsigned int _nLines, _nCols;
     gsl_matrix* _matrix;
 

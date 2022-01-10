@@ -15,6 +15,12 @@ Vector::Vector(const unsigned int n, const double x): _size(n)
     _vect = gsl_vector_alloc(_size);
     setAll(x);
 }
+Vector::Vector(gsl_vector_view vv)
+{   
+    _size = vv.vector.size;
+    _vect = gsl_vector_alloc(_size);
+    gsl_vector_memcpy(_vect, &vv.vector);
+}
 Vector::Vector(const Vector& v)
 {
     _size = v._size;
