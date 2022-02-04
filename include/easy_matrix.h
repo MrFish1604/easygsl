@@ -16,6 +16,7 @@ struct couple
 class Matrix
 {
 public:
+    Matrix(const unsigned int& n);
     Matrix(const unsigned int& n, const unsigned int& m);
     Matrix(const unsigned int& n, const unsigned int& m, const double value);
     Matrix(const Matrix& mat);
@@ -42,9 +43,11 @@ protected:
     gsl_matrix* _matrix;
 
 friend Matrix dot(const Matrix& A, const Matrix& B);
+friend double dot00(const Matrix& A, const Matrix& B);
+friend Matrix transpose(const Matrix& A);
 };
 
-Matrix createIndentity(const unsigned int n, const unsigned int m);
+Matrix createIdentity(const unsigned int n, const unsigned int m);
 
 Matrix operator+(const Matrix& mat, const Matrix& mat1);
 Matrix operator+(const Matrix& mat, const double& a);

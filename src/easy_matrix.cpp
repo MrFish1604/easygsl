@@ -1,5 +1,9 @@
 #include "easy_matrix.h"
 
+Matrix::Matrix(const unsigned int& n): _nLines(n), _nCols(n)
+{
+    _matrix = gsl_matrix_alloc(_nLines, _nCols);
+}
 Matrix::Matrix(const unsigned int& n, const unsigned int& m): _nLines(n), _nCols(m)
 {
     _matrix = gsl_matrix_alloc(_nLines, _nCols);
@@ -114,7 +118,7 @@ Matrix::~Matrix()
 }
 
 
-Matrix createIndentity(const unsigned int n, const unsigned int m)
+Matrix createIdentity(const unsigned int n, const unsigned int m)
 {
     Matrix mat(n, m);
     mat.setIdentity();
@@ -181,4 +185,18 @@ Matrix dot(const Matrix& A, const Matrix& B)
     Matrix C(A._nLines, B._nCols);
     gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., A._matrix, B._matrix, 0., C._matrix);
     return C;
+}
+
+double dot00(const Matrix& A, const Matrix& B)
+{
+    Matrix C(A._nLines, B._nCols);
+    gsl_blas_dgemm(CblasNoTrans, CblasNoTrans, 1., A._matrix, B._matrix, 0., C._matrix);
+    return C.atne(0,0);
+}
+
+Matrix transpose(const Matrix& A)
+{
+    Matrix mat(A._nCols, A._nLines);
+    gsl_matrix_transpose_memcpy(mat._matrix, A._matrix);
+    return mat;
 }
