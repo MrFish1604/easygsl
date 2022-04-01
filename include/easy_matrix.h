@@ -37,6 +37,7 @@ public:
     void operator/=(const Matrix& mat);
     void operator/=(const double& a);
     double& operator[](const couple& i);
+    void copy(const Matrix& mat);
     ~Matrix();
 protected:
     unsigned int _nLines, _nCols;
@@ -55,6 +56,7 @@ Matrix operator-(const Matrix& mat, const Matrix& mat1);
 Matrix operator-(const Matrix& mat, const double& a);
 Matrix operator*(const Matrix& mat, const Matrix& mat1);
 Matrix operator*(const Matrix& mat, const double& a);
+Matrix operator*(const double& a, const Matrix& mat);
 Matrix operator/(const Matrix& mat, const Matrix& mat1);
 Matrix operator/(const Matrix& mat, const double& a);
 std::ostream& operator<<(std::ostream& stream, Matrix& mat);

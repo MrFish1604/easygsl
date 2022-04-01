@@ -161,6 +161,12 @@ Matrix operator*(const Matrix& mat, const double& a)
     c*= a;
     return c;
 }
+Matrix operator*(const double& a, const Matrix& mat)
+{
+    Matrix c(mat);
+    c*=a;
+    return c;
+}
 Matrix operator/(const Matrix& mat, const Matrix& mat1)
 {
     Matrix c(mat);
@@ -199,4 +205,9 @@ Matrix transpose(const Matrix& A)
     Matrix mat(A._nCols, A._nLines);
     gsl_matrix_transpose_memcpy(mat._matrix, A._matrix);
     return mat;
+}
+
+void Matrix::copy(const Matrix& mat)
+{
+    gsl_matrix_memcpy(_matrix, mat._matrix);
 }
