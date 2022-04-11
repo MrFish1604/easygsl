@@ -107,10 +107,11 @@ double& Matrix::operator[](const couple& i)
     return *gsl_matrix_ptr(_matrix, i.x, i.y);
 }
 
-/*void Matrix::operator=(const Matrix& mat)
+void Matrix::operator=(const Matrix& mat)
 {
-    gsl_matrix_memcpy(_matrix, mat._matrix);
-}*/
+    // gsl_matrix_memcpy(_matrix, mat._matrix);
+    copy(mat);
+}
 void Matrix::copy(const Matrix& mat)
 {
     gsl_matrix_free(_matrix);
