@@ -21,7 +21,7 @@ Matrix::Matrix(const Matrix& mat)
     gsl_matrix_memcpy(_matrix, mat._matrix);
 }
 
-double& Matrix::at(const unsigned int& i, const unsigned int& j)
+double& Matrix::at(const unsigned int& i, const unsigned int& j) const
 {
     if(i>=_nLines || j>=_nCols)
         throw std::out_of_range("Index out of range");
@@ -29,7 +29,7 @@ double& Matrix::at(const unsigned int& i, const unsigned int& j)
         return *gsl_matrix_ptr(_matrix, i, j);
 }
 
-double& Matrix::atne(const unsigned int& i, const unsigned int& j)
+double& Matrix::atne(const unsigned int& i, const unsigned int& j) const
 {
     return *gsl_matrix_ptr(_matrix, i, j);
 }
@@ -44,9 +44,9 @@ Vector Matrix::getCol(const unsigned int& i)
     return Vector(gsl_matrix_column(_matrix, i));
 }
 
-int Matrix::nrows(){ return _nLines; }
+int Matrix::nrows() const { return _nLines; }
 
-int Matrix::ncols(){ return _nCols; }
+int Matrix::ncols() const { return _nCols; }
 
 std::string Matrix::toString()
 {

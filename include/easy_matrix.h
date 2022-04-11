@@ -20,12 +20,12 @@ public:
     Matrix(const unsigned int& n, const unsigned int& m);
     Matrix(const unsigned int& n, const unsigned int& m, const double value);
     Matrix(const Matrix& mat);
-    double& at(const unsigned int& i, const unsigned int& j);
-    double& atne(const unsigned int& i, const unsigned int& j);
+    double& at(const unsigned int& i, const unsigned int& j) const;
+    double& atne(const unsigned int& i, const unsigned int& j) const;
     Vector getRow(const unsigned int& i);
     Vector getCol(const unsigned int& i);
-    int nrows();
-    int ncols();
+    int nrows() const;
+    int ncols() const;
     std::string toString();     // TODO
     void setIdentity();
     void operator+=(const Matrix& mat);
