@@ -107,6 +107,19 @@ double& Matrix::operator[](const couple& i)
     return *gsl_matrix_ptr(_matrix, i.x, i.y);
 }
 
+/*void Matrix::operator=(const Matrix& mat)
+{
+    gsl_matrix_memcpy(_matrix, mat._matrix);
+}*/
+void Matrix::copy(const Matrix& mat)
+{
+    gsl_matrix_free(_matrix);
+    _nLines = mat._nLines;
+    _nCols = mat._nCols;
+    _matrix = gsl_matrix_alloc(_nLines, _nCols);
+    gsl_matrix_memcpy(_matrix, mat._matrix);
+}
+
 void Matrix::setIdentity()
 {
     gsl_matrix_set_identity(_matrix);
@@ -205,9 +218,4 @@ Matrix transpose(const Matrix& A)
     Matrix mat(A._nCols, A._nLines);
     gsl_matrix_transpose_memcpy(mat._matrix, A._matrix);
     return mat;
-}
-
-void Matrix::copy(const Matrix& mat)
-{
-    gsl_matrix_memcpy(_matrix, mat._matrix);
 }

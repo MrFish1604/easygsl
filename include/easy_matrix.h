@@ -36,6 +36,7 @@ public:
     void operator*=(const double& a);
     void operator/=(const Matrix& mat);
     void operator/=(const double& a);
+    // void operator=(const Matrix& mat);
     double& operator[](const couple& i);
     void copy(const Matrix& mat);
     ~Matrix();
