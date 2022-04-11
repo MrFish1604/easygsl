@@ -47,6 +47,7 @@ protected:
 friend Matrix dot(const Matrix& A, const Matrix& B);
 friend double dot00(const Matrix& A, const Matrix& B);
 friend Matrix transpose(const Matrix& A);
+friend bool operator==(const Matrix& A, const Matrix& B);
 };
 
 Matrix createIdentity(const unsigned int n, const unsigned int m);

@@ -193,6 +193,24 @@ Matrix operator/(const Matrix& mat, const double& a)
     return c;
 }
 
+bool operator==(const Matrix& A, const Matrix& B)
+{
+    if(A._nLines != B._nLines)
+        return false;
+    if(A._nCols != B._nCols)
+        return false;
+    
+    for(int i=0; i<A._nLines; i++)
+    {
+        for(int j=0; j<A._nCols; j++)
+        {
+            if(A.atne(i,j)!=B.atne(i,j))
+                return false;
+        }
+    }
+    return true;
+}
+
 std::ostream& operator<<(std::ostream& stream, Matrix& mat)
 {
     stream << mat.toString();
