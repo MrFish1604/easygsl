@@ -1,24 +1,27 @@
 #include "easy_matrix.h"
 
-Matrix::Matrix(const unsigned int& n): _nLines(n), _nCols(n), _lu_computed(false)
+Matrix::Matrix()
+{
+    _matrix = nullptr;
+    _p = nullptr;
+}
+
+Matrix::Matrix(const unsigned int& n): _nLines(n), _nCols(n), _signum(0), _p(nullptr)
 {
     _matrix = gsl_matrix_alloc(_nLines, _nCols);
 }
-Matrix::Matrix(const unsigned int& n, const unsigned int& m): _nLines(n), _nCols(m), _lu_computed(false)
+Matrix::Matrix(const unsigned int& n, const unsigned int& m): _nLines(n), _nCols(m), _signum(0), _p(nullptr)
 {
     _matrix = gsl_matrix_alloc(_nLines, _nCols);
 }
-Matrix::Matrix(const unsigned int& n, const unsigned int& m, const double value): _nLines(n), _nCols(m), _lu_computed(false)
+Matrix::Matrix(const unsigned int& n, const unsigned int& m, const double value): _nLines(n), _nCols(m), _signum(0), _p(nullptr)
 {
     _matrix = gsl_matrix_alloc(_nLines, _nCols);
     gsl_matrix_set_all(_matrix, value);
 }
-Matrix::Matrix(const Matrix& mat): _lu_computed(false)
+Matrix::Matrix(const Matrix& mat): _p(nullptr)
 {
-    _nLines = mat._nLines;
-    _nCols = mat._nCols;
-    _matrix = gsl_matrix_alloc(_nLines, _nCols);
-    gsl_matrix_memcpy(_matrix, mat._matrix);
+    copy(mat);
 }
 
 double& Matrix::at(const unsigned int& i, const unsigned int& j)
@@ -136,6 +139,35 @@ void Matrix::copy(const Matrix& mat)
     _nCols = mat._nCols;
     _matrix = gsl_matrix_alloc(_nLines, _nCols);
     gsl_matrix_memcpy(_matrix, mat._matrix);
+    _signum = mat._signum;
+    if(mat._p!=nullptr)
+        gsl_permutation_memcpy(_p, mat._p);
+    else
+        _p = nullptr;
+}
+
+void Matrix::computeLU()
+{
+    _p = gsl_permutation_alloc(_nLines);
+    gsl_linalg_LU_decomp(_matrix, _p, &_signum);
+}
+
+Matrix Matrix::getLU()
+{
+    Matrix rtn;
+    rtn.copy(*this);
+    rtn.computeLU();
+    return rtn;
+}
+
+int Matrix::signum()
+{
+    return _signum;
+}
+
+bool Matrix::LUcomputed()
+{
+    return _p!=nullptr;
 }
 
 void Matrix::setIdentity()
@@ -146,6 +178,7 @@ void Matrix::setIdentity()
 Matrix::~Matrix()
 {
     gsl_matrix_free(_matrix);
+    gsl_permutation_free(_p);
 }
 
 

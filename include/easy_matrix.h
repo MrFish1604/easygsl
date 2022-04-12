@@ -4,6 +4,8 @@
 #include <gsl/gsl_matrix.h>
 #include <iostream>
 #include <gsl/gsl_blas.h>
+#include <gsl/gsl_linalg.h>
+#include <gsl/gsl_permutation.h>
 #include "easy_vector.h"
 
 typedef struct couple couple;
@@ -16,6 +18,7 @@ struct couple
 class Matrix
 {
 public:
+    Matrix();
     Matrix(const unsigned int& n);
     Matrix(const unsigned int& n, const unsigned int& m);
     Matrix(const unsigned int& n, const unsigned int& m, const double value);
@@ -41,13 +44,17 @@ public:
     void operator=(const Matrix& mat);
     double& operator[](const couple& i);
     double operator[](const couple& i) const;
+    void computeLU();
+    Matrix getLU();
+    int signum();
     void copy(const Matrix& mat);
+    bool LUcomputed();
     ~Matrix();
 protected:
     unsigned int _nLines, _nCols;
     gsl_matrix* _matrix;
-    gsl_matrix* _lu;
-    bool _lu_computed;
+    gsl_permutation* _p;
+    int _signum;
 
 friend Matrix dot(const Matrix& A, const Matrix& B);
 friend double dot00(const Matrix& A, const Matrix& B);
