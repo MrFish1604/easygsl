@@ -47,6 +47,7 @@ public:
     void computeLU();
     Matrix getLU();
     int signum() const ;
+    double det();
     void copy(const Matrix& mat);
     bool LUcomputed();
     ~Matrix();

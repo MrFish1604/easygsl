@@ -170,6 +170,15 @@ bool Matrix::LUcomputed()
     return _p!=nullptr;
 }
 
+double Matrix::det()
+{
+    if(_p==nullptr)
+    {
+        return getLU().det();
+    }
+    return gsl_linalg_LU_det(_matrix, _signum);
+}
+
 void Matrix::setIdentity()
 {
     gsl_matrix_set_identity(_matrix);
