@@ -22,3 +22,7 @@ install: lib/easy_gsl.a /usr/include/easy_gsl/ /usr/lib/easy_gsl/
 
 /usr/include/easy_gsl/ /usr/lib/easy_gsl/:
 	mkdir /usr/include/easy_gsl/ /usr/lib/easy_gsl/
+
+uninstall:
+	rm /usr/include/easy_gsl/*
+	rm /usr/lib/easy_gsl/*
