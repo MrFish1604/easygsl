@@ -152,7 +152,7 @@ void Matrix::computeLU()
     gsl_linalg_LU_decomp(_matrix, _p, &_signum);
 }
 
-Matrix Matrix::getLU()
+Matrix Matrix::getLU() const
 {
     Matrix rtn;
     rtn.copy(*this);
@@ -170,13 +170,28 @@ bool Matrix::LUcomputed()
     return _p!=nullptr;
 }
 
-double Matrix::det()
+double Matrix::det() const
 {
     if(_p==nullptr)
-    {
         return getLU().det();
-    }
     return gsl_linalg_LU_det(_matrix, _signum);
+}
+
+void Matrix::invert()
+{
+    if(_p==nullptr)
+        computeLU();
+    gsl_matrix* inverse = gsl_matrix_alloc(_nLines, _nCols);
+    gsl_linalg_LU_invert(_matrix, _p, inverse);
+    gsl_matrix_free(_matrix);
+    _matrix = inverse;
+}
+
+Matrix Matrix::getInverse() const
+{
+    Matrix rtn = getLU();
+    rtn.invert();
+    return rtn;
 }
 
 void Matrix::setIdentity()

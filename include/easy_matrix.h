@@ -45,9 +45,11 @@ public:
     double& operator[](const couple& i);
     double operator[](const couple& i) const;
     void computeLU();
-    Matrix getLU();
+    Matrix getLU() const ;
     int signum() const ;
-    double det();
+    double det() const;
+    void invert();
+    Matrix getInverse() const;
     void copy(const Matrix& mat);
     bool LUcomputed();
     ~Matrix();
