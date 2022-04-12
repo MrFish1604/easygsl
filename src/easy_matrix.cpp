@@ -160,7 +160,7 @@ Matrix Matrix::getLU()
     return rtn;
 }
 
-int Matrix::signum()
+int Matrix::signum() const
 {
     return _signum;
 }
@@ -262,7 +262,7 @@ bool operator==(const Matrix& A, const Matrix& B)
     return true;
 }
 
-std::ostream& operator<<(std::ostream& stream, Matrix& mat)
+std::ostream& operator<<(std::ostream& stream, const Matrix& mat)
 {
     stream << mat.toString();
     return stream;

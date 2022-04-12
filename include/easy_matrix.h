@@ -46,7 +46,7 @@ public:
     double operator[](const couple& i) const;
     void computeLU();
     Matrix getLU();
-    int signum();
+    int signum() const ;
     void copy(const Matrix& mat);
     bool LUcomputed();
     ~Matrix();
@@ -73,6 +73,6 @@ Matrix operator*(const Matrix& mat, const double& a);
 Matrix operator*(const double& a, const Matrix& mat);
 Matrix operator/(const Matrix& mat, const Matrix& mat1);
 Matrix operator/(const Matrix& mat, const double& a);
-std::ostream& operator<<(std::ostream& stream, Matrix& mat);
+std::ostream& operator<<(std::ostream& stream, const Matrix& mat);
 
 #endif
