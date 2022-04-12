@@ -20,13 +20,15 @@ public:
     Matrix(const unsigned int& n, const unsigned int& m);
     Matrix(const unsigned int& n, const unsigned int& m, const double value);
     Matrix(const Matrix& mat);
-    double& at(const unsigned int& i, const unsigned int& j) const;
-    double& atne(const unsigned int& i, const unsigned int& j) const;
+    double& at(const unsigned int& i, const unsigned int& j);
+    double& atne(const unsigned int& i, const unsigned int& j);
+    double at(const unsigned int& i, const unsigned int& j) const;
+    double atne(const unsigned int& i, const unsigned int& j) const;
     Vector getRow(const unsigned int& i);
     Vector getCol(const unsigned int& i);
     int nrows() const;
     int ncols() const;
-    std::string toString();     // TODO
+    std::string toString() const;
     void setIdentity();
     void operator+=(const Matrix& mat);
     void operator+=(const double& a);
@@ -38,11 +40,14 @@ public:
     void operator/=(const double& a);
     void operator=(const Matrix& mat);
     double& operator[](const couple& i);
+    double operator[](const couple& i) const;
     void copy(const Matrix& mat);
     ~Matrix();
 protected:
     unsigned int _nLines, _nCols;
     gsl_matrix* _matrix;
+    gsl_matrix* _lu;
+    bool _lu_computed;
 
 friend Matrix dot(const Matrix& A, const Matrix& B);
 friend double dot00(const Matrix& A, const Matrix& B);
